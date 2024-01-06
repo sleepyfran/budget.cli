@@ -1,9 +1,18 @@
 module Budget.Core.ScalarParser
 
+open System
+open System.Globalization
+
 module Decimal =
     /// Attempts to parse a string into a decimal.
     let fromStr (str: string) =
-        match System.Decimal.TryParse(str) with
+        match
+            Decimal.TryParse(
+                str,
+                NumberStyles.AllowDecimalPoint ||| NumberStyles.AllowLeadingSign,
+                CultureInfo.InvariantCulture
+            )
+        with
         | true, decimal -> Some decimal
         | _ -> None
 
