@@ -23,14 +23,14 @@ type MonthEntryType =
     | Savings
 
 /// Defines a field, with the name of the field and the value of the field.
-type Field = { Name: string; Value: string }
+type Field = { Name: string; Value: decimal }
 
 /// Defines an entry in a month, with the name of the entry (for example, income) and the fields that it contains.
 type MonthEntry =
-    { Type: MonthEntryType
-      Fields: Field list }
+    { Month: Month
+      Entries: (MonthEntryType * Field list) list }
 
 /// Defines a journal, with the year that it defines and the entries for each month.
 type Journal =
     { Year: int
-      MonthEntries: Map<Month, MonthEntry list> }
+      MonthEntries: MonthEntry list }

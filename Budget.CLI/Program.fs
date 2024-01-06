@@ -47,9 +47,18 @@ let private parseJournal file =
     let result = file |> JournalParser.parse
 
     match result with
-    | Ok journal -> $"{journal.Year}" |> Calm |> toConsole
+    | Ok journal ->
+        Calm $"Your budget for the year {journal.Year} is:" |> toConsole
+
+        for monthEntry in journal.MonthEntries do
+            Edgy $"{monthEntry.Month}\n==========" |> toConsole
+
+            for entryType, fields in monthEntry.Entries do
+                Edgy $"{entryType}\n==========" |> toConsole
+
+                for field in fields do
+                    Calm $"{field.Name}: {field.Value}" |> toConsole
     | Error JournalParser.InvalidSyntax ->
-        // TODO: Improve error reporting.
         MarkupC(Color.Red, "There was an error parsing the file. Check that it is valid YAML.")
         |> toConsole
     | Error JournalParser.YearMissing ->
@@ -62,4 +71,23 @@ let private parseJournal file =
             [ Styles.error "The year you specified is invalid. Use, you know, a normal year."
               Styles.hint
                   "(I mean, the app is checking for years before 1900 and after 3000, but you're not there, right?" ]
+        |> toConsole
+    | Error(JournalParser.InvalidMonth monthName) ->
+        Styles.error
+            $"The month {monthName} is not a valid month. Make sure you have a valid month name in your journal."
+        |> toConsole
+    | Error(JournalParser.MissingEntry(monthName, entryName)) ->
+        Styles.error $"The entry {entryName} is missing from the month {monthName}."
+        |> toConsole
+    | Error(JournalParser.InvalidEntry(monthName, entryName)) ->
+        Styles.error
+            $"The entry {entryName} is invalid in the month {monthName}. Make sure you have a valid entry name in your journal."
+        |> toConsole
+    | Error(JournalParser.InvalidField(monthName, entryName)) ->
+        Styles.error
+            $"The field inside the entry {entryName} of the month {monthName} is invalid. Make sure you have a valid field name in your journal."
+        |> toConsole
+    | Error(JournalParser.InvalidFieldValue(monthName, entryName, fieldName)) ->
+        Styles.error
+            $"The field {fieldName}, inside the entry {entryName} of the month {monthName} contains an invalid value. Make sure the value is a decimal number."
         |> toConsole

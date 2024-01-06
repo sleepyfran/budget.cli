@@ -8,6 +8,7 @@
     <ItemGroup>
       <Compile Include="Utils\Union.fs" />
       <Compile Include="Utils\Result.fs" />
+      <Compile Include="Utils\String.fs" />
       <Compile Include="IO.fs" />
       <Compile Include="Model.fs" />
       <Compile Include="ScalarParser.fs" />
