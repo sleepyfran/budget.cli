@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Program.fs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Argu" Version="6.1.4" />
+      <PackageReference Include="EluciusFTW.SpectreCoff" Version="0.48.20" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Budget.Core\Budget.Core.fsproj" />
+    </ItemGroup>
+
+</Project>
