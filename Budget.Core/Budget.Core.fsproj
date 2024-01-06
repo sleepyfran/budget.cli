@@ -6,7 +6,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Include="Utils\Union.fs" />
+      <Compile Include="Utils\Result.fs" />
       <Compile Include="IO.fs" />
+      <Compile Include="Model.fs" />
+      <Compile Include="ScalarParser.fs" />
+      <Compile Include="JournalParser.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FsToolkit.ErrorHandling" Version="4.14.0" />
+      <PackageReference Include="YamlDotNet" Version="13.7.1" />
     </ItemGroup>
 
 </Project>

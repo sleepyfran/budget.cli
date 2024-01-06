@@ -1,8 +1,9 @@
-﻿open Argu
+﻿module rec Budget.CLI.Program
+
+open Argu
 open Budget.Core
 open Spectre.Console
 open SpectreCoff
-open System
 
 type Arguments =
     | [<Mandatory; AltCommandLine("-j")>] Journal of path: string
@@ -19,7 +20,7 @@ let main argv =
             colorizer =
                 function
                 | ErrorCode.HelpText -> None
-                | _ -> Some ConsoleColor.Red
+                | _ -> Some System.ConsoleColor.Red
         )
 
     let parser =
@@ -32,7 +33,7 @@ let main argv =
     let readResult = IO.read journalPath
 
     match readResult with
-    | Ok file -> Edgy file |> toConsole
+    | Ok file -> parseJournal file
     | Error _ ->
         MarkupC(
             Color.Red,
@@ -41,3 +42,24 @@ let main argv =
         |> toConsole
 
     0
+
+let private parseJournal file =
+    let result = file |> JournalParser.parse
+
+    match result with
+    | Ok journal -> $"{journal.Year}" |> Calm |> toConsole
+    | Error JournalParser.InvalidSyntax ->
+        // TODO: Improve error reporting.
+        MarkupC(Color.Red, "There was an error parsing the file. Check that it is valid YAML.")
+        |> toConsole
+    | Error JournalParser.YearMissing ->
+        Many
+            [ Styles.error "You are missing a year field in your journal. Add it to the top of the file. For example:"
+              Styles.error "year: 2021" ]
+        |> toConsole
+    | Error JournalParser.YearInvalid ->
+        Many
+            [ Styles.error "The year you specified is invalid. Use, you know, a normal year."
+              Styles.hint
+                  "(I mean, the app is checking for years before 1900 and after 3000, but you're not there, right?" ]
+        |> toConsole

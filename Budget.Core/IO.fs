@@ -1,4 +1,4 @@
-module Budget.Core.IO
+module rec Budget.Core.IO
 
 open System
 open System.IO
@@ -11,9 +11,20 @@ type IOError =
 /// Reads all lines from a file into a string.
 let read path =
     try
-        File.ReadAllText path |> Ok
+        path |> expandPath |> File.ReadAllText |> Ok
     with
     | :? DirectoryNotFoundException
     | :? IOException
     | :? UnauthorizedAccessException -> Error FailedToReadFile
     | _ -> Error Unknown
+
+// Expands a tilde in the beginning of a path to the user's home directory.
+let private expandPath (path: string) =
+    let needsExpansion = path.StartsWith("~")
+
+    if needsExpansion then
+        path
+            .Remove(0)
+            .Insert(0, Environment.GetFolderPath Environment.SpecialFolder.UserProfile)
+    else
+        path
