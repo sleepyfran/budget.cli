@@ -84,8 +84,9 @@ let private parseJournal file =
             $"The entry \"{entryName}\" is invalid in the month \"{monthName}\". Make sure you have a valid entry name in your journal."
         |> toConsole
     | Error(JournalParser.InvalidField(monthName, entryName)) ->
-        Styles.error
-            $"A field inside the entry \"{entryName}\" of the month {monthName} is invalid. Make sure you have a all fields inside an entry have the format \"- name: value\""
+        Many
+            [ Styles.error $"A field inside the entry \"{entryName}\" of the month {monthName} is invalid."
+              Styles.hint "Make sure you have a all fields inside an entry have the format \"- name: value\"" ]
         |> toConsole
     | Error(JournalParser.InvalidFieldValue(monthName, entryName, fieldName)) ->
         Styles.error
