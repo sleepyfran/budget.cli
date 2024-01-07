@@ -77,7 +77,7 @@ let private tryParseMonth (root: NodeChildren) (month: Month) =
     | Some(Mapping(_, children)) ->
         result {
             let! entries =
-                Union.allCasesOf<MonthEntryType> ()
+                Union.allCasesOf<Category> ()
                 |> List.traverseResultM (tryParseEntry children monthName)
 
             return { Month = month; Entries = entries }
@@ -86,7 +86,7 @@ let private tryParseMonth (root: NodeChildren) (month: Month) =
     | Some _ -> Error(InvalidMonth monthName) |> Some
     | None -> None
 
-let private tryParseEntry (monthChildren: NodeChildren) (monthName: string) (entry: MonthEntryType) =
+let private tryParseEntry (monthChildren: NodeChildren) (monthName: string) (entry: Category) =
     let entryName = entry |> Union.caseName |> String.lowercased
     let entryNode = monthChildren |> Map.tryFind entryName
 

@@ -16,7 +16,7 @@ type Month =
     | December
 
 /// Defines a type of entry in a month.
-type MonthEntryType =
+type Category =
     | Income
     | Expenses
     | Goals
@@ -28,7 +28,7 @@ type Field = { Name: string; Value: decimal }
 /// Defines an entry in a month, with the name of the entry (for example, income) and the fields that it contains.
 type MonthEntry =
     { Month: Month
-      Entries: (MonthEntryType * Field list) list }
+      Entries: (Category * Field list) list }
 
 /// Defines a journal, with the year that it defines and the entries for each month.
 type Journal =

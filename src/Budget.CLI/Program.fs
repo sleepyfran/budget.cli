@@ -47,17 +47,7 @@ let private parseJournal file =
     let result = file |> JournalParser.parse
 
     match result with
-    | Ok journal ->
-        Calm $"Your budget for the year {journal.Year} is:" |> toConsole
-
-        for monthEntry in journal.MonthEntries do
-            Edgy $"{monthEntry.Month}\n==========" |> toConsole
-
-            for entryType, fields in monthEntry.Entries do
-                Edgy $"{entryType}\n==========" |> toConsole
-
-                for field in fields do
-                    Calm $"{field.Name}: {field.Value}" |> toConsole
+    | Ok journal -> MonthSummary.show journal
     | Error JournalParser.InvalidSyntax ->
         MarkupC(Color.Red, "There was an error parsing the file. Check that it is valid YAML.")
         |> toConsole
