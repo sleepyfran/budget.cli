@@ -74,20 +74,20 @@ let private parseJournal file =
         |> toConsole
     | Error(JournalParser.InvalidMonth monthName) ->
         Styles.error
-            $"The month {monthName} is not a valid month. Make sure you have a valid month name in your journal."
+            $"The month \"{monthName}\" is not a valid month. Make sure you have a valid month name in your journal."
         |> toConsole
     | Error(JournalParser.MissingEntry(monthName, entryName)) ->
-        Styles.error $"The entry {entryName} is missing from the month {monthName}."
+        Styles.error $"The entry \"{entryName}\" is missing from the month \"{monthName}\"."
         |> toConsole
     | Error(JournalParser.InvalidEntry(monthName, entryName)) ->
         Styles.error
-            $"The entry {entryName} is invalid in the month {monthName}. Make sure you have a valid entry name in your journal."
+            $"The entry \"{entryName}\" is invalid in the month \"{monthName}\". Make sure you have a valid entry name in your journal."
         |> toConsole
     | Error(JournalParser.InvalidField(monthName, entryName)) ->
         Styles.error
-            $"The field inside the entry {entryName} of the month {monthName} is invalid. Make sure you have a valid field name in your journal."
+            $"A field inside the entry \"{entryName}\" of the month {monthName} is invalid. Make sure you have a all fields inside an entry have the format \"- name: value\""
         |> toConsole
     | Error(JournalParser.InvalidFieldValue(monthName, entryName, fieldName)) ->
         Styles.error
-            $"The field {fieldName}, inside the entry {entryName} of the month {monthName} contains an invalid value. Make sure the value is a decimal number."
+            $"The field \"{fieldName}\", inside the entry \"{entryName}\" of the month \"{monthName}\" contains an invalid value. Make sure the value is a decimal number."
         |> toConsole

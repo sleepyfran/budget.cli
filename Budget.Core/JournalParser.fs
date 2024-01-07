@@ -35,9 +35,9 @@ let private parse' (contents: string) =
     let yamlStream = YamlStream()
     yamlStream.Load(contentReader)
 
-    // The root should always be a mapping node.
     let root = yamlStream.Documents[0].RootNode
 
+    // The root should always be a mapping node.
     match root with
     | Mapping(_, children) ->
         result {
