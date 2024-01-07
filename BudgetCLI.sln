@@ -1,8 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Budget.CLI", "Budget.CLI\Budget.CLI.fsproj", "{9DBD912D-559F-47B8-94BB-464B12ECCE92}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Budget.CLI", "src\Budget.CLI\Budget.CLI.fsproj", "{9DBD912D-559F-47B8-94BB-464B12ECCE92}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Budget.Core", "Budget.Core\Budget.Core.fsproj", "{EB22FC95-CFBB-41D3-89F6-597419EE622C}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Budget.Core", "src\Budget.Core\Budget.Core.fsproj", "{EB22FC95-CFBB-41D3-89F6-597419EE622C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2C14AB5C-DCE4-49B5-AF0A-A32AB71EA937}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE2D97A5-14C8-4E6C-B054-26F832F6E656}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Budget.Core.Tests", "tests\Budget.Core.Tests\Budget.Core.Tests.fsproj", "{08A8AF5B-C096-4120-8D08-3AD028DF4646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +24,14 @@ Global
 		{EB22FC95-CFBB-41D3-89F6-597419EE622C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB22FC95-CFBB-41D3-89F6-597419EE622C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB22FC95-CFBB-41D3-89F6-597419EE622C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A8AF5B-C096-4120-8D08-3AD028DF4646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A8AF5B-C096-4120-8D08-3AD028DF4646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A8AF5B-C096-4120-8D08-3AD028DF4646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A8AF5B-C096-4120-8D08-3AD028DF4646}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9DBD912D-559F-47B8-94BB-464B12ECCE92} = {2C14AB5C-DCE4-49B5-AF0A-A32AB71EA937}
+		{EB22FC95-CFBB-41D3-89F6-597419EE622C} = {2C14AB5C-DCE4-49B5-AF0A-A32AB71EA937}
+		{08A8AF5B-C096-4120-8D08-3AD028DF4646} = {AE2D97A5-14C8-4E6C-B054-26F832F6E656}
 	EndGlobalSection
 EndGlobal
