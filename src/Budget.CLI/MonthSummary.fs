@@ -1,4 +1,4 @@
-module Budget.CLI.MonthSummary
+module rec Budget.CLI.MonthSummary
 
 open Budget.Core
 open Budget.Core.Model
@@ -7,13 +7,17 @@ open SpectreCoff
 open System
 open SpectreCoff.Styling
 
-let show journal =
-    let allMonths = Utils.Union.allCasesOf<Model.Month> ()
-    let currentMonthIndex = DateTime.Now.Month
-    let currentMonth = allMonths[currentMonthIndex - 1]
+let show month journal =
+    let summary = JournalSummary.Month.summarizeMonth month journal
 
-    let summary = JournalSummary.Month.summarizeMonth currentMonth journal
+    let containsEntries = not (summary.Entries |> Map.isEmpty)
 
+    if containsEntries then
+        show' summary
+    else
+        $"You don't have any entries for \"{month}\"." |> Styles.warn |> toConsole
+
+let private show' summary =
     let categoryTables =
         summary.Entries
         |> Map.map (fun category fieldsWithTotal ->

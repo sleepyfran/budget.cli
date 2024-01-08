@@ -5,6 +5,8 @@ open SpectreCoff
 
 let error str = MarkupC(Color.Red, str)
 
+let warn str = MarkupC(Color.Yellow, str)
+
 let hint str = MarkupC(Color.Grey, str)
 
 let private decimal (value: decimal<_>) =
