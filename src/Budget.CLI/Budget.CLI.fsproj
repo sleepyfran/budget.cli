@@ -8,6 +8,7 @@
     <ItemGroup>
         <Compile Include="Styles.fs" />
         <Compile Include="MonthSummary.fs" />
+        <Compile Include="Errors.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
