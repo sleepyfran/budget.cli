@@ -6,13 +6,13 @@ open Spectre.Console
 open SpectreCoff
 
 type Arguments =
-    | [<Mandatory; AltCommandLine("-j")>] Journal of path: string
+    | [<MainCommand; ExactlyOnce; Last>] Journal of path: string
     | [<AltCommandLine("-m")>] Month of month: Model.Month
 
     interface IArgParserTemplate with
         member s.Usage =
             match s with
-            | Journal _ -> "specify a journal file that contains a year budget"
+            | Journal _ -> "journal file that contains a year budget"
             | Month _ ->
                 "specify a specific month to show (e.g. \"january\"). If not specified, the current month is used"
 
