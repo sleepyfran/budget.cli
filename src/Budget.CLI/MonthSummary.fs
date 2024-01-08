@@ -4,8 +4,6 @@ open Budget.Core
 open Budget.Core.Model
 open Spectre.Console
 open SpectreCoff
-open System
-open SpectreCoff.Styling
 
 let show month journal =
     let summary = JournalSummary.Month.summarizeMonth month journal
@@ -32,16 +30,22 @@ let private show' summary =
             let fieldsTable =
                 customTable
                     { defaultTableLayout with
-                        Border = TableBorder.Minimal
+                        Border = TableBorder.Simple
                         Sizing = Collapse }
                     fieldsColumns
                     fieldsRows
+                |> withTitle categoryName
 
-            Many [ Calm categoryName; fieldsTable.toOutputPayload ])
+            fieldsTable.toOutputPayload)
         |> List.ofSeq
         |> List.map (_.Value)
 
-    grid [ Payloads categoryTables ] |> _.toOutputPayload |> toConsole
+    categoryTables
+    |> List.chunkBySize 2
+    |> List.map Payloads
+    |> grid
+    |> _.toOutputPayload
+    |> toConsole
 
     let totalsColumns = [ Styles.tableColumn "Name"; Styles.tableColumn "Amount" ]
 

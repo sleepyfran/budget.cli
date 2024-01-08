@@ -6,7 +6,7 @@ open Spectre.Console
 open SpectreCoff
 
 type Arguments =
-    | [<MainCommand; ExactlyOnce; Last>] Journal of path: string
+    | [<MainCommand; ExactlyOnce>] Journal of path: string
     | [<AltCommandLine("-m")>] Month of month: Model.Month
 
     interface IArgParserTemplate with
