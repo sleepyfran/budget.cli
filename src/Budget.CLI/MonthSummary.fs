@@ -21,7 +21,9 @@ let private show' summary =
         |> Map.map (fun category fieldsWithTotal ->
             let categoryName = Utils.Union.caseName category
 
-            let fieldsColumns = [ Styles.tableColumn "Field"; Styles.tableColumn "Amount" ]
+            let fieldsColumns =
+                [ Styles.tableColumn "Field"
+                  Styles.tableColumn "Amount" |> withFooter (Styles.money fieldsWithTotal.Total) ]
 
             let fieldsRows =
                 fieldsWithTotal.Fields
