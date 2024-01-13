@@ -2,6 +2,7 @@ module Budget.Core.Model
 
 /// Defines a month.
 type Month =
+    | Leftover (* Obviously not a month, but we'll allow it so that transferring between years is not that awkward :D *)
     | January
     | February
     | March

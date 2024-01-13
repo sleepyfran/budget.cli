@@ -7,7 +7,7 @@ open System
 let currentMonth () =
     let allMonths = Union.allCasesOf<Month> ()
     let currentMonthIndex = DateTime.Now.Month
-    allMonths[currentMonthIndex - 1]
+    allMonths[currentMonthIndex] (* Zero index is the leftover month. *)
 
 /// Attempts to parse a month from a string.
 let monthByName name =
