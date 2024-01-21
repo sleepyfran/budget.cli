@@ -25,7 +25,7 @@ let summarizeMonth month (journal: Journal) =
             monthEntry.Entries
             |> Map.ofList
             |> Map.map (fun _ fields ->
-                let total = fields |> List.sumBy _.Value
+                let total = fields |> List.sumBy (fun field -> field.Value)
 
                 { Fields = fields; Total = total }))
         |> Option.defaultValue Map.empty
