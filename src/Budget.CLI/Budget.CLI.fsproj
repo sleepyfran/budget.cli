@@ -6,7 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="Resources\SampleJournal.yml" />
+        <Content Include="Resources\SampleJournal.yml">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Compile Include="Styles.fs" />
         <Compile Include="MonthSummary.fs" />
         <Compile Include="YearSummary.fs" />

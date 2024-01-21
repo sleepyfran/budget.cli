@@ -9,7 +9,6 @@ type Arguments =
     | [<MainCommand; ExactlyOnce>] Journal of path: string
     | [<AltCommandLine("-m")>] Month of month: Model.Month
     | [<AltCommandLine("-y")>] Year
-    | Sample
 
     interface IArgParserTemplate with
         member s.Usage =
@@ -18,7 +17,6 @@ type Arguments =
             | Month _ ->
                 "specify a specific month to show (e.g. \"january\"). If not specified, the current month is used"
             | Year -> "shows the year summary"
-            | Sample -> "loads an internal test journal instead of reading it from the path"
 
 type private SelectedOption =
     | Year
@@ -63,7 +61,7 @@ let main argv =
 
 let private readFile (arguments: ParseResults<Arguments>) =
     let journalPath = arguments.GetResult(Journal)
-    let sampleMode = arguments.Contains(Sample)
+    let sampleMode = journalPath = "sample"
 
     if sampleMode then
         System.IO.Directory.GetParent(__SOURCE_DIRECTORY__)
