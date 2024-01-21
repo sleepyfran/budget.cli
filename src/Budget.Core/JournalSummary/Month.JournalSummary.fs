@@ -9,13 +9,6 @@ let private savingsCategories = [ Goals; Savings ]
 /// Defines an entry of a month with the summary details, which include the total out, total saved and total.
 type CategoryWithTotals = { Fields: Field list; Total: decimal }
 
-/// Defines the totals, which include the total out, total saved and total.
-type Totals =
-    { Out: decimal
-      Saved: decimal
-      Total: decimal
-      LeftToSpend: decimal }
-
 /// Defines the summary of a month, which includes the month and the entries with the totals.
 type MonthSummary =
     { Month: Month
@@ -31,7 +24,7 @@ let summarizeMonth month (journal: Journal) =
         |> Option.map (fun monthEntry ->
             monthEntry.Entries
             |> Map.ofList
-            |> Map.map (fun category fields ->
+            |> Map.map (fun _ fields ->
                 let total = fields |> List.sumBy _.Value
 
                 { Fields = fields; Total = total }))

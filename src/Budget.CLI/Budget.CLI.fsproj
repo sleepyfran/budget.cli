@@ -6,8 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Content Include="Resources\SampleJournal.yml" />
         <Compile Include="Styles.fs" />
         <Compile Include="MonthSummary.fs" />
+        <Compile Include="YearSummary.fs" />
         <Compile Include="Errors.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>

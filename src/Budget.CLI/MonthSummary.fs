@@ -18,7 +18,8 @@ let show month journal =
 let private show' summary =
     let categoryTables =
         summary.Entries
-        |> Map.map (fun category fieldsWithTotal ->
+        |> Map.toList
+        |> List.map (fun (category, fieldsWithTotal) ->
             let categoryName = Utils.Union.caseName category
 
             let fieldsColumns =
@@ -27,6 +28,7 @@ let private show' summary =
 
             let fieldsRows =
                 fieldsWithTotal.Fields
+                |> List.sortBy _.Name
                 |> List.map (fun item -> Payloads [ Vanilla item.Name; Styles.money item.Value ])
 
             let fieldsTable =
@@ -39,8 +41,6 @@ let private show' summary =
                 |> withTitle categoryName
 
             fieldsTable.toOutputPayload)
-        |> List.ofSeq
-        |> List.map (_.Value)
 
     categoryTables
     |> List.chunkBySize 2
@@ -59,7 +59,8 @@ let private show' summary =
     let totalsTable =
         customTable
             { defaultTableLayout with
-                HideHeaders = true }
+                HideHeaders = true
+                Sizing = Collapse }
             totalsColumns
             totalsRows
 

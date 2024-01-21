@@ -35,3 +35,10 @@ type MonthEntry =
 type Journal =
     { Year: int
       MonthEntries: MonthEntry list }
+
+/// Defines the totals, which include the total out, total saved and total.
+type Totals =
+    { Out: decimal
+      Saved: decimal
+      Total: decimal
+      LeftToSpend: decimal }
