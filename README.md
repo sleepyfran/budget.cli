@@ -72,6 +72,8 @@ the savings section with the amount I want to save for things like emergencies, 
 with with the monthly report so that I can see how much I actually have left to spend for the month. I also run it with the yearly
 option to see the total amount I've saved for each saving category:
 
+<img width="774" alt="Screenshot showing the month report of a sample budget" src="https://github.com/sleepyfran/budget.cli/assets/6024783/098ce941-9b9c-40ec-a0bd-e48d4005babf">
+
 The idea being that I still try to follow the [first two rules of YNAB](https://www.ynab.com/the-four-rules) without actually
 having to track every single transaction. I still have a budget, I still try to give every dollar a job, and I still try to
 embrace my true expenses. I just don't track every single transaction, just the big picture.
