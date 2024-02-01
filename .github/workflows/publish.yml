@@ -28,12 +28,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Publish
+      working-directory: src/Budget.CLI
       run: dotnet publish --output dist/
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: dist/${{ matrix.artifact_name }}
+        file: src/Budget.CLI/dist/${{ matrix.artifact_name }}
         asset_name: ${{ matrix.asset_name }}
         tag: ${{ github.ref }}
         overwrite: true

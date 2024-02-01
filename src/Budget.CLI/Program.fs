@@ -1,6 +1,7 @@
 ﻿module rec Budget.CLI.Program
 
 open Argu
+open Budget.CLI.Resources
 open Budget.Core
 open Spectre.Console
 open SpectreCoff
@@ -64,9 +65,7 @@ let private readFile (arguments: ParseResults<Arguments>) =
     let sampleMode = journalPath = "sample"
 
     if sampleMode then
-        System.IO.Directory.GetParent(__SOURCE_DIRECTORY__)
-        |> fun baseDir -> System.IO.Path.Combine(baseDir.FullName, "Budget.CLI/Resources/SampleJournal.yml")
-        |> IO.read
+        Sample.sample |> Ok
     else
         IO.read journalPath
 
